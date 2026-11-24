@@ -7,10 +7,28 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+header .wrap{display:flex;align-items:center;gap:12px}
+header .logo{margin-right:auto}
+header .tabs{display:flex;gap:4px;margin:0;padding:0;border:0;background:none;width:auto}
+header .tab{padding:8px 14px;white-space:nowrap}
+header nav{display:flex;gap:12px}
+#portfolio{scroll-margin-top:72px}
+@media (max-width:720px){
+  header .wrap{flex-wrap:wrap}
+  header .tabs{order:3;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
+</style>
 </head>
 <body>
 <header><div class="wrap"><a class="logo" href="#top">Kittikorn Thraisunthorn</a>
-<nav><a href="#portfolio">โอ้ยย</a><a href="#contact">ติดต่อ</a></nav></div></header>
+  <div class="tabs" role="tablist" aria-label="หมวดหมู่">
+  <button class="tab" role="tab" id="tab-about" ...>เกี่ยวกับฉัน</button>
+  <button class="tab" role="tab" id="tab-works" ...>ผลงาน</button>
+  <button class="tab" role="tab" id="tab-soft" ...>Soft skills</button>
+  <button class="tab" role="tab" id="tab-certs" ...>เกียรติบัตร</button>
+</div>
+<nav><a href="#contact">ติดต่อ</a></nav></div></header>
 <main id="top">
 <div class="hero"><svg class="hbg" viewBox="0 0 1440 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
 <defs><linearGradient id="hs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B5D6F4"/><stop offset=".6" stop-color="#EAF4FD"/><stop offset="1" stop-color="#fff"/></linearGradient></defs>
@@ -38,12 +56,6 @@
 </div></div>
 
 <section id="portfolio"><div class="wrap">
-<div class="tabs" role="tablist" aria-label="หมวดหมู่">
-<button class="tab" role="tab" id="tab-about" aria-controls="p-about" aria-selected="true">เกี่ยวกับฉัน</button>
-<button class="tab" role="tab" id="tab-works" aria-controls="p-works" aria-selected="false" tabindex="-1">ผลงาน</button>
-<button class="tab" role="tab" id="tab-soft" aria-controls="p-soft" aria-selected="false" tabindex="-1">Soft skills</button>
-<button class="tab" role="tab" id="tab-certs" aria-controls="p-certs" aria-selected="false" tabindex="-1">เกียรติบัตร</button>
-</div>
 
 <div class="panel" role="tabpanel" id="p-about" aria-labelledby="tab-about">
 <div class="head"><h2>About Me</h2><p class="sub">ผมเป็นใคร ทำอะไร และสนใจเรื่องอะไร</p></div>
@@ -95,5 +107,13 @@
 <!-- ข้อมูลผลงาน/รูป อยู่ใน data.js | ตัวสร้างหน้าเว็บอยู่ใน script.js -->
 <script src="data.js"></script>
 <script src="script.js"></script>
+<script>
+document.querySelectorAll('header .tab').forEach(function(b){
+  b.addEventListener('click',function(){
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.getElementById('portfolio').scrollIntoView({behavior:reduce?'auto':'smooth'});
+  });
+});
+</script>
 </body>
 </html>
