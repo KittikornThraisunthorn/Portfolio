@@ -95,3 +95,484 @@ dialog p{color:var(--mut);margin:0 0 14px}
 /* รูปเพิ่มเติมในหน้าต่างรายละเอียด */
 .gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:8px}
 .gal img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+
+/* Fix Soft Skills image display */
+.sk2 .m {
+    aspect-ratio: 16 / 10;
+    background: #F5F9FE;
+}
+
+.sk2 .m img {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    object-position: center 50%;
+}
+/* Professional About Me Layout */
+
+#p-about .about {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    align-items: center;
+    gap: 48px;
+    margin-top: 30px;
+}
+
+.about-profile {
+    width: 100%;
+}
+
+.about-profile img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 768px) {
+    #p-about .about {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .about-profile {
+        max-width: 280px;
+        margin: 0 auto;
+    }
+}
+
+/* Featured Project Layout */
+
+#feat {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#feat > .m {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+    background: #F2F7FC;
+}
+
+#feat > .m img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+#feat .fb {
+    padding: 32px;
+}
+
+/* Presentation and Colab Buttons */
+
+.portfolio-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.portfolio-actions a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 18px 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.portfolio-actions strong {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.portfolio-actions small {
+    font-size: 12px;
+    margin-top: 5px;
+    opacity: 0.85;
+}
+
+.presentation-link {
+    background: #1A5FB4;
+    color: #FFFFFF;
+    border: 1px solid #1A5FB4;
+}
+
+.presentation-link:hover {
+    background: #0B2A4A;
+    transform: translateY(-3px);
+}
+
+.colab-link {
+    background: #FFF8E7;
+    color: #995500;
+    border: 1px solid #F9AB00;
+}
+
+.colab-link:hover {
+    background: #FFE8AD;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 600px) {
+    .portfolio-actions {
+        grid-template-columns: 1fr;
+    }
+
+    #feat .fb {
+        padding: 24px;
+    }
+}
+
+/* ===== Compact Featured Project ===== */
+
+#feat {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 760px;
+    margin: 24px auto 40px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Project Cover Image */
+
+#feat > .m {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    min-height: 0;
+    aspect-ratio: auto;
+    background: #F2F7FC;
+    overflow: hidden;
+}
+
+#feat > .m img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Project Description */
+
+#feat .fb {
+    padding: 24px 28px;
+}
+
+#feat .fb h2 {
+    font-size: 24px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
+
+#feat .fb p {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* Compact Presentation and Colab Buttons */
+
+#feat .portfolio-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: 480px;
+    margin: 20px auto 0;
+}
+
+#feat .portfolio-actions a {
+    padding: 12px 10px;
+    min-height: 56px;
+    border-radius: 10px;
+}
+
+#feat .portfolio-actions strong {
+    font-size: 14px;
+}
+
+#feat .portfolio-actions small {
+    font-size: 11px;
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 600px) {
+
+    #feat {
+        max-width: 100%;
+    }
+
+    #feat > .m {
+        height: 220px;
+    }
+
+    #feat .fb {
+        padding: 20px;
+    }
+
+    #feat .fb h2 {
+        font-size: 20px;
+    }
+
+    #feat .portfolio-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Two Featured Projects ===== */
+
+#feat {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 30px auto;
+    align-items: stretch;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.featured-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: #ffffff;
+    border: 1px solid #D3E1F2;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.featured-card > .m {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+    background: #F2F7FC;
+    overflow: hidden;
+}
+
+.featured-card > .m img,
+.featured-card > .m svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#feat .featured-card .fb {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 24px;
+    gap: 12px;
+}
+
+.featured-card h3 {
+    font-size: 22px;
+    line-height: 1.4;
+}
+
+.featured-card dd {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.featured-detail {
+    align-self: flex-start;
+}
+
+#feat .featured-card .portfolio-actions {
+    margin-top: auto;
+    padding-top: 16px;
+    width: 100%;
+    max-width: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 768px) {
+    #feat {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    #feat .featured-card .portfolio-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Other Project Buttons ===== */
+
+.project-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    border: 1px solid #D3E1F2;
+    border-radius: 16px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.project-item > .card {
+    width: 100%;
+    flex: 1;
+    border: none;
+    box-shadow: none;
+}
+
+.project-item .portfolio-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    width: auto;
+    margin: 0;
+    padding: 12px;
+}
+
+.project-item .portfolio-actions a {
+    padding: 12px 8px;
+    font-size: 13px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.project-item .portfolio-actions small {
+    font-size: 11px;
+}
+
+/* ===== Professional About Me Layout ===== */
+
+#p-about .about {
+    display: grid;
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    align-items: center;
+    gap: 48px;
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 20px 0;
+}
+
+#p-about .about-profile {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    align-self: center;
+}
+
+#p-about .about-profile img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(15, 45, 75, 0.10);
+}
+
+#p-about .about > div:nth-child(2) {
+    min-width: 0;
+}
+
+#p-about .about h2 {
+    font-size: clamp(24px, 3vw, 30px);
+    line-height: 1.4;
+    margin: 0 0 20px;
+    color: #102E4D;
+}
+
+#p-about .about p {
+    font-size: 15px;
+    line-height: 1.85;
+    margin-bottom: 16px;
+}
+
+#p-about .about .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+#p-about .about .tags i {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+#p-about .info {
+    display: none;
+}
+
+/* Responsive Layout for Mobile */
+
+@media (max-width: 768px) {
+    #p-about .about {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 10px 0;
+    }
+
+    #p-about .about-profile {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    #p-about .about h2 {
+        text-align: center;
+    }
+}
+/* ===== About Me Image Alignment ===== */
+
+#p-about .about {
+    align-items: start;
+    grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+    gap: 40px;
+}
+
+#p-about .about-profile {
+    align-self: start;
+    margin: 0;
+    padding: 0;
+}
+
+#p-about .about-profile img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    border-radius: 18px;
+}
+
+@media (max-width: 768px) {
+    #p-about .about {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}

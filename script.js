@@ -7,19 +7,161 @@ return `<svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" aria-hid
 const $=id=>document.getElementById(id),dlg=$("dlg"),db=$("dbody");
 const m=(o,k)=>`<div class="m ${k||""}">${o.img?`<img src="${o.img}" alt="${o.t}">`:scene(o.t.length)+(k==="cert"?"<span>ใส่ภาพเกียรติบัตร</span>":"")}</div>`;
 const tg=a=>`<div class="tags">${a.map(x=>`<i>${x}</i>`).join("")}</div>`;
-$("feat").innerHTML=`${m(FEAT)}<div class="fb"><span class="badge">${FEAT.c}</span><h3>${FEAT.t}</h3><dl><div><dt>โจทย์</dt><dd>${FEAT.q}</dd></div><div><dt>แนวคิด</dt><dd>${FEAT.i}</dd></div><div><dt>บทบาทของผม</dt><dd>${FEAT.r}</dd></div></dl>${tg(FEAT.g)}<button class="btn main" id="fbtn">ดูรายละเอียด</button></div>`;
-$("grid").innerHTML=W.map((p,i)=>`<button class="card" data-i="${i}">${m(p)}<div class="b"><div class="meta">${p.c}</div><h3>${p.t}</h3><p>${p.d}</p></div></button>`).join("");
+//$("feat").innerHTML=`${m(FEAT)}<div class="fb"><span class="badge">${FEAT.c}</span><h3>${FEAT.t}</h3><dl><div><dt>Challenge</dt><dd>${FEAT.q}</dd></div><div><dt>Approach</dt><dd>${FEAT.i}</dd></div><div><dt>My Contribution</dt><dd>${FEAT.r}</dd></div></dl>${tg(FEAT.g)}<button class="btn main" id="fbtn">View Details</button></div>`;
+
+const featuredProjects = [FEAT, FEAT2];
+
+$("feat").innerHTML = featuredProjects.map((p, i) => `
+    <article class="featured-card">
+
+        ${m(p)}
+
+        <div class="fb">
+            <span class="badge">${p.c}</span>
+            <h3>${p.t}</h3>
+
+            <dl>
+                <div>
+                    <dt>Challenge</dt>
+                    <dd>${p.q}</dd>
+                </div>
+
+                <div>
+                    <dt>Approach</dt>
+                    <dd>${p.i}</dd>
+                </div>
+
+                <div>
+                    <dt>My Contribution</dt>
+                    <dd>${p.r}</dd>
+                </div>
+            </dl>
+
+            ${tg(p.g)}
+
+            <button class="btn main featured-detail"
+                    data-index="${i}">
+                View Details
+            </button>
+
+            ${renderProjectButtons(p)}
+        </div>
+
+    </article>
+`).join("");
+
+// $("grid").innerHTML=W.map((p,i)=>`<button class="card" data-i="${i}">${m(p)}<div class="b"><div class="meta">${p.c}</div><h3>${p.t}</h3><p>${p.d}</p></div></button>`).join("");
+
+$("grid").innerHTML = W.map((p,i) => `
+    <article class="project-item">
+
+        <button class="card" data-i="${i}">
+            ${m(p)}
+
+            <div class="b">
+                <div class="meta">${p.c}</div>
+                <h3>${p.t}</h3>
+                <p>${p.d}</p>
+            </div>
+        </button>
+
+        ${renderProjectButtons(p)}
+
+    </article>
+`).join("");
+
 $("cgrid").innerHTML=C.map((p,i)=>`<button class="card c" data-k="${i}">${m(p,"cert","พื้นที่ใส่เกียรติบัตร")}<div class="b"><h3>${p.t}</h3><div class="meta" style="margin:0">${p.c}</div></div></button>`).join("");
 const gal=o=>o.imgs&&o.imgs.length?`<div class="gal">${o.imgs.map(s=>`<img src="${s}" alt="${o.t}" loading="lazy">`).join("")}</div>`:"";
 const open=h=>{db.innerHTML=h;dlg.showModal()};
-$("ban").innerHTML=scene(7);
-$("sgrid").innerHTML=S.map(p=>`<div class="sk2">${m(p,"","พื้นที่ใส่รูปประกอบ")}<div class="sb"><h3>${p.t}</h3><p>${p.d}</p><div class="ex"><b>ตัวอย่างจากประสบการณ์</b>${p.e}</div></div></div>`).join("");
+//$("ban").innerHTML=scene(7);
+$("sgrid").innerHTML=S.map(p=>`<div class="sk2">${m(p,"","พื้นที่ใส่รูปประกอบ")}<div class="sb"><h3>${p.t}</h3><p>${p.d}</p><div class="ex"><b>Practical Experience</b>${p.e}</div></div></div>`).join("");
 const tabs=[...document.querySelectorAll(".tab")];
 function pick(t){tabs.forEach(x=>{const on=x===t;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute("aria-controls")).hidden=!on});t.focus()}
 tabs.forEach((t,i)=>{t.onclick=()=>pick(t);t.onkeydown=e=>{const d={ArrowRight:1,ArrowLeft:-1}[e.key];if(d){e.preventDefault();pick(tabs[(i+d+tabs.length)%tabs.length])}}});
 $("go-works").onclick=()=>pick($("tab-works"));
-$("fbtn").onclick=()=>open(`${m(FEAT)}<div class="db"><div class="meta">${FEAT.c}</div><h3>${FEAT.t}</h3><p>${FEAT.q}</p><p>${FEAT.i}</p>${tg(FEAT.g)}${gal(FEAT)}</div>`);
+//$("fbtn").onclick=()=>open(`${m(FEAT)}<div class="db"><div class="meta">${FEAT.c}</div><h3>${FEAT.t}</h3><p>${FEAT.q}</p><p>${FEAT.i}</p>${tg(FEAT.g)}${gal(FEAT)}</div>`);
+
+document.querySelectorAll(".featured-detail").forEach(btn => {
+    btn.onclick = () => {
+        const p = featuredProjects[Number(btn.dataset.index)];
+
+        open(`
+            ${m(p)}
+
+            <div class="db">
+                <div class="meta">${p.c}</div>
+                <h3>${p.t}</h3>
+
+                <h4>Challenge</h4>
+                <p>${p.q}</p>
+
+                <h4>Approach</h4>
+                <p>${p.i}</p>
+
+                <h4>My Contribution</h4>
+                <p>${p.r}</p>
+
+                ${tg(p.g)}
+                ${gal(p)}
+                ${renderProjectButtons(p)}
+            </div>
+        `);
+    };
+});
+
 $("grid").onclick=e=>{const b=e.target.closest(".card");if(!b)return;const p=W[+b.dataset.i];open(`${m(p)}<div class="db"><div class="meta">${p.c}</div><h3>${p.t}</h3><p>${p.l}</p>${tg(p.g)}${gal(p)}</div>`)};
 $("cgrid").onclick=e=>{const b=e.target.closest(".card");if(!b)return;const p=C[+b.dataset.k];open(`${m(p,"cert","พื้นที่ใส่เกียรติบัตร")}<div class="db"><div class="meta">${p.c}</div><h3>${p.t}</h3></div>`)};
 dlg.querySelector(".close").onclick=()=>dlg.close();
 dlg.onclick=e=>{if(e.target===dlg)dlg.close()};
+
+/* Presentation and Google Colab */
+
+function renderProjectButtons(p) {
+    return `
+        <div class="portfolio-actions">
+
+            ${p.pdf ? `
+                <a class="presentation-link"
+                   href="${p.pdf}"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <strong>View Presentation ↗</strong>
+                    <small>Project Slides · PDF</small>
+                </a>
+            ` : ""}
+
+            ${p.colab ? `
+                <a class="colab-link"
+                   href="${p.colab}"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <strong>Open in Colab ↗</strong>
+                    <small>Source Code · Notebook</small>
+                </a>
+            ` : ""}
+
+        </div>
+    `;
+}
+
+/* Featured Project */
+// document.querySelector("#feat .fb")
+//     .insertAdjacentHTML(
+//         "beforeend",
+//         renderProjectButtons(FEAT)
+//     );
+
+/* Other Projects */
+$("grid").addEventListener("click", e => {
+    const card = e.target.closest(".card");
+    if (!card) return;
+
+    const p = W[Number(card.dataset.i)];
+    if (!p) return;
+
+    db.insertAdjacentHTML(
+        "beforeend",
+        renderProjectButtons(p)
+    );
+});
+
